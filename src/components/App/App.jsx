@@ -1,8 +1,7 @@
+import { useState, useEffect } from 'react';
 import './App.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import { useState, useEffect } from 'react';
 
 import ImageError from 'components/ImageError/ImageError';
 import Notification from 'components/Notification/Notification';
@@ -26,7 +25,7 @@ export default function App() {
     }
     setStatus('pending');
 
-    API.fetchImages(inputValue, page)
+     API.fetchImages(inputValue, page)
       .then(results => {
         if (results.hits.length === 0) return setStatus('empty');
 
@@ -44,7 +43,7 @@ export default function App() {
         setStatus('rejected');
         toast.error('Whoops, something went wrong');
       });
-  }, [ inputValue, page]);
+  }, [inputValue, page]);
 
   const handleFormSubmit = inputValue => {
     setInputValue(inputValue);

@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-// import PropTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#modal-root');
 
 export default function Modal({ children, closeModal }) {
   useEffect(() => {
-    const handleKeyDown = event => {
+    const handleKeyDown = (event) => {
       if (event.code === 'Escape') closeModal();
     };
     window.addEventListener('keydown', handleKeyDown);

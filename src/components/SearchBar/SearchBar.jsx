@@ -7,12 +7,13 @@ import { FaSearch } from 'react-icons/fa';
 export default function SearchBar({ onSubmit }) {
   const [inputValue, setInputValue] = useState('');
 
-  const handleNameChange = event => {
+  const handleNameChange = (event) => {
     setInputValue(event.currentTarget.value.toLowerCase());
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+    
     if (inputValue.trim() === '') {
       return toast.warning('Write something');
     }
