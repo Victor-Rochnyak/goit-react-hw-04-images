@@ -44,6 +44,7 @@ export default function App() {
         setStatus('rejected');
         toast.error('Whoops, something went wrong');
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ inputValue, page]);
 
   const handleFormSubmit = inputValue => {
