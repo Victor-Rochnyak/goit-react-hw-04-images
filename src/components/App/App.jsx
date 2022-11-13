@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,7 +28,7 @@ export default function App() {
     }
     setStatus('pending');
 
-    API.fetchImages(inputValue, page)
+    API.fetchImages(getRemainingPages, inputValue, page)
       .then(results => {
         if (results.hits.length === 0) return setStatus('empty');
 
@@ -44,8 +46,7 @@ export default function App() {
         setStatus('rejected');
         toast.error('Whoops, something went wrong');
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ inputValue, page]);
+  }, [getRemainingPages, inputValue, page]);
 
   const handleFormSubmit = inputValue => {
     setInputValue(inputValue);
