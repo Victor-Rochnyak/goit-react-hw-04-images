@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import './App.css';
+
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import './App.css';
 import ImageError from 'components/ImageError/ImageError';
 import Notification from 'components/Notification/Notification';
 import API from 'components/api/api';
