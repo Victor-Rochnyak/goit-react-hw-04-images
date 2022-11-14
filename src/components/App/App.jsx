@@ -14,9 +14,9 @@ export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
-  const [error] = useState(null);
+  const [error, setError] = useState(null);
   const [status, setStatus] = useState('idle');
-  const [isLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [loadBtnIsShown, setLoadBtnIsShown] = useState(false);
 
   useEffect(() => {
@@ -25,12 +25,16 @@ export default function App() {
     }
     setStatus('pending');
 
-     API.fetchImages(inputValue, page)
+    const images = API.fetchImages(inputValue, page)
       .then(results => {
         if (results.hits.length === 0) return setStatus('empty');
 
         setImages(images => [...images, ...results.hits]);
+        const getRemainingPages = totalImages => {
+          return Math.ceil(totalImages / API.perPage) - page;
+        };
         const remainingPages = getRemainingPages(results.totalHits);
+       
 
         if (remainingPages > 0) {
           setLoadBtnIsShown(true);
@@ -53,9 +57,6 @@ export default function App() {
   const loadMore = () => {
     setPage(page => page + 1);
   };
-  const getRemainingPages = totalImages => {
-    return Math.ceil(totalImages / API.perPage) - page;
-  };
 
   return (
     <div>
@@ -71,9 +72,7 @@ export default function App() {
       )}
       {status === 'idle' && <h1>Please, enter your request</h1>}
       {status === 'rejected' && <ImageError message={error.message} />}
-      {status === 'resolved' && (
-        <ImageGalleryList images={images} isLoading={isLoading} />
-      )}
+      {<ImageGalleryList images={images} isLoading={isLoading} />}
       {loadBtnIsShown && <ButtonLoadMore onClick={loadMore} />}
     </div>
   );
