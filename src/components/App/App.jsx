@@ -30,12 +30,12 @@ export default function App() {
         if (results.hits.length === 0) return setStatus('empty');
 
         setImages(images => [...images, ...results.hits]);
+        
         const getRemainingPages = totalImages => {
           return Math.ceil(totalImages / API.perPage) - page;
         };
         const remainingPages = getRemainingPages(results.totalHits);
        
-
         if (remainingPages > 0) {
           setLoadBtnIsShown(true);
         } else {
