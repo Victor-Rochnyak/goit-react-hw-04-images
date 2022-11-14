@@ -14,9 +14,9 @@ export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
   const [status, setStatus] = useState('idle');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading] = useState(true);
   const [loadBtnIsShown, setLoadBtnIsShown] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function App() {
     }
     setStatus('pending');
 
-    const images = API.fetchImages(inputValue, page)
+     API.fetchImages(inputValue, page)
       .then(results => {
         if (results.hits.length === 0) return setStatus('empty');
 
